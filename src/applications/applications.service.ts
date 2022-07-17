@@ -6,6 +6,7 @@ export class ApplicationsService {
     id_photo?: Express.Multer.File[];
     license_proof?: Express.Multer.File[];
   }): Promise<void> {
+    // logs the files
     console.log(files);
   }
 }

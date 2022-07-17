@@ -14,7 +14,7 @@ async function bootstrap() {
     .setDescription('The egovernment API description')
     .setVersion('1.0')
     .addTag('register')
-    .addServer('http://192.168.178.107:3000')
+    .addServer(process.env.SWAGGER_SERVER_DEFINITION)
     .build();
   const document = SwaggerModule.createDocument(app, config);
 

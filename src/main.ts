@@ -3,6 +3,7 @@ import { NestFactory } from '@nestjs/core';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { AppModule } from './app.module';
 import * as fs from 'fs';
+import 'dotenv/config';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -18,7 +19,7 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, config);
 
   // Only show and generate the Swagger documentation if the dev environment variable is set
-  if (true || process.env.NODE_ENV === 'development') {
+  if (process.env.NODE_ENV === 'development') {
     fs.writeFileSync('./swagger-spec.json', JSON.stringify(document));
     SwaggerModule.setup('api', app, document);
   }

@@ -7,6 +7,5 @@ export class ApplicationsService {
     license_proof?: Express.Multer.File[];
   }): Promise<void> {
     console.log(files);
-    return;
   }
 }

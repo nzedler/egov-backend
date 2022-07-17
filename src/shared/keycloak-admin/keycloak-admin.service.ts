@@ -10,8 +10,8 @@ export class KeycloakAdminService implements IIamAdminService {
   constructor() {
     this.kcAdminClient = new KcAdminClient();
     this.kcAdminClient.setConfig({
-      baseUrl: 'https://keycloak.e-government-portal.de/auth',
-      realmName: 'master',
+      baseUrl: process.env.KC_BASE_URL,
+      realmName: process.env.KC_REALM,
     });
   }
 
@@ -24,10 +24,10 @@ export class KeycloakAdminService implements IIamAdminService {
    */
   private async authorize(): Promise<void> {
     await this.kcAdminClient.auth({
-      username: 'admin',
-      password: 'zh6up77A8h6apH99YZVfvc5CjV8eKA',
+      username: process.env.KC_ADMIN_USERNAME,
+      password: process.env.KC_ADMIN_PASSWORD,
       grantType: 'password',
-      clientId: 'admin-cli',
+      clientId: process.env.KC_CLIENT_ID,
     });
   }
 
@@ -41,7 +41,7 @@ export class KeycloakAdminService implements IIamAdminService {
   public async registerUser(user: User): Promise<{ id: string }> {
     await this.authorize();
     return this.kcAdminClient.users.create({
-      realm: 'master',
+      realm: process.env.KC_REALM,
       username: user.email,
       firstName: user.firstname,
       lastName: user.lastname,
